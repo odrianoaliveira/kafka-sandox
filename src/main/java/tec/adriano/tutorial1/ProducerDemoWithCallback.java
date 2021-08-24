@@ -1,5 +1,6 @@
 package tec.adriano.tutorial1;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -11,8 +12,8 @@ import java.util.stream.IntStream;
 
 import static org.apache.kafka.clients.producer.ProducerConfig.*;
 
+@Slf4j
 public class ProducerDemoWithCallback {
-    private static final Logger logger = LoggerFactory.getLogger(ProducerDemoWithCallback.class);
     public static final String BOOTSTRAP_SERVERS = "localhost:9092";
 
     public static void main(String[] args) {
@@ -31,13 +32,13 @@ public class ProducerDemoWithCallback {
             producer.send(record, (recordMetadata, e) -> {
                 // executes everytime a record is successfully sent
                 if (e == null) {
-                    logger.info("Received new metadata: \n" +
+                    log.info("Received new metadata: \n" +
                             "Topic: " + recordMetadata.topic() + "\n" +
                             "Partition: " + recordMetadata.partition() + "\n" +
                             "Offsets: " + recordMetadata.offset() + "\n" +
                             "Timestamp: " + recordMetadata.timestamp());
                 } else {
-                    logger.error("Error while producing", e);
+                    log.error("Error while producing", e);
                 }
             });
         });

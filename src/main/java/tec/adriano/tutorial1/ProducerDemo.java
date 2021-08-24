@@ -1,5 +1,6 @@
 package tec.adriano.tutorial1;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -11,7 +12,6 @@ import java.util.Properties;
 import static org.apache.kafka.clients.producer.ProducerConfig.*;
 
 public class ProducerDemo {
-//    private static final Logger logger = LoggerFactory.getLogger(ProducerDemo.class);
     public static final String BOOTSTRAP_SERVERS = "localhost:9092";
 
     public static void main(String[] args) {

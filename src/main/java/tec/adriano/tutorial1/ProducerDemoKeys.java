@@ -1,5 +1,6 @@
 package tec.adriano.tutorial1;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -11,8 +12,8 @@ import java.util.stream.IntStream;
 
 import static org.apache.kafka.clients.producer.ProducerConfig.*;
 
+@Slf4j
 public class ProducerDemoKeys {
-    private static final Logger logger = LoggerFactory.getLogger(ProducerDemoKeys.class);
     public static final String BOOTSTRAP_SERVERS = "localhost:9092";
 
     public static void main(String[] args) {
@@ -33,19 +34,19 @@ public class ProducerDemoKeys {
                     new ProducerRecord<>(topic, key, topicValue);
 
             // by providing a key, we guarantee that the same key always goes to the same partition
-            logger.info("Key : {}", key);
+            log.info("Key : {}", key);
 
             try {
                 producer.send(record, (recordMetadata, e) -> {
                     // executes everytime a record is successfully sent
                     if (e == null) {
-                        logger.info("Received new metadata: \n" +
+                        log.info("Received new metadata: \n" +
                                 "Topic: " + recordMetadata.topic() + "\n" +
                                 "Partition: " + recordMetadata.partition() + "\n" +
                                 "Offsets: " + recordMetadata.offset() + "\n" +
                                 "Timestamp: " + recordMetadata.timestamp());
                     } else {
-                        logger.error("Error while producing", e);
+                        log.error("Error while producing", e);
                     }
                 }).get(); //block the .send() to make it synchronous, never do this on prod!!!
             } catch (Exception e) {
