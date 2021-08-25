@@ -14,12 +14,10 @@ import static org.apache.kafka.clients.producer.ProducerConfig.*;
 
 @Slf4j
 public class ProducerDemoWithCallback {
-    public static final String BOOTSTRAP_SERVERS = "localhost:9092";
-
     public static void main(String[] args) {
         Properties properties = new Properties();
 
-        properties.setProperty(BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
+        properties.setProperty(BOOTSTRAP_SERVERS_CONFIG, Constants.BOOTSTRAP_SERVERS);
         properties.setProperty(KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.setProperty(VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
@@ -27,7 +25,7 @@ public class ProducerDemoWithCallback {
 
         IntStream.range(0, 10).forEach(value -> {
             ProducerRecord<String, String> record =
-                    new ProducerRecord<>("tech.adriano.kafka.test", "Hello Kafka from Java - with callbacks!");
+                    new ProducerRecord<>(Constants.TOPIC, "Hello Kafka from Java - with callbacks!");
 
             producer.send(record, (recordMetadata, e) -> {
                 // executes everytime a record is successfully sent

@@ -26,12 +26,11 @@ public class ProducerDemoKeys {
         KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
 
         IntStream.range(0, 10).forEach(value -> {
-            String topic = "tech.adriano.kafka.test";
             String topicValue = "Hello Kafka from Java - with callbacks!";
             String key = "id_" + value;
 
             ProducerRecord<String, String> record =
-                    new ProducerRecord<>(topic, key, topicValue);
+                    new ProducerRecord<>(Constants.TOPIC, key, topicValue);
 
             // by providing a key, we guarantee that the same key always goes to the same partition
             log.info("Key : {}", key);
