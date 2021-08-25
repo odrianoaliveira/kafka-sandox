@@ -13,7 +13,7 @@ import java.util.Properties;
 
 
 @Slf4j
-public class ConsumerDemo {
+public class ConsumerDemoGroups {
     private static final String GROUP_ID = "my-fourth-app";
 
     public static void main(String[] args) {
