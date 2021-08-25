@@ -1,17 +1,16 @@
 package tec.adriano.tutorial1;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Properties;
 
 import static org.apache.kafka.clients.producer.ProducerConfig.*;
 
 public class ProducerDemo {
+
+    // https://kafka.apache.org/documentation/#producerconfigs
 
     public static void main(String[] args) {
         Properties properties = new Properties();

@@ -16,6 +16,8 @@ import java.util.Properties;
 public class ConsumerDemo {
     private static final String GROUP_ID = "my-fourth-app";
 
+    // https://kafka.apache.org/documentation/#consumerconfigs
+
     public static void main(String[] args) {
         Properties properties = new Properties();
 
